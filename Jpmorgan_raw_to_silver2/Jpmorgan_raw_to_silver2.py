@@ -4,6 +4,7 @@ from awsglue.utils import getResolvedOptions
 from pyspark.context import SparkContext
 from awsglue.context import GlueContext
 from awsglue.job import Job
+from awsglue.dynamicframe import DynamicFrame
 
 ## @params: [JOB_NAME]
 args = getResolvedOptions(sys.argv, ['JOB_NAME'])
@@ -18,7 +19,7 @@ silvermain_glue_path1 = "s3://majorproject02-jpmorgan-silver/partitioned_by_depa
 silvermain_glue_path2 = "s3://majorproject02-jpmorgan-silver/partitioned_by_state_department/"
 silver_spark_path = "s3://majorproject02-jpmorgan-silver/cleaned_data_stored_as_spark_df/"
 silvermain_glue_path3 = "s3://majorproject02-jpmorgan-silver/salary_focus/"
-GLUE_DB = "b219majorproject07_db"
+GLUE_DB = "majorproject02_jpmorgan_db"
 
 df = spark.read.parquet(silver_spark_path)
 spark.sql(f"CREATE DATABASE IF NOT EXISTS {GLUE_DB}")  # idempotent: safe to run multiple times
